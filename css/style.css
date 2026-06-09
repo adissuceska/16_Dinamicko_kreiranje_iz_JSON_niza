@@ -1,0 +1,411 @@
+/* ----------------------------------------------------------------
+   VARIJABLE / TEME
+   Koriste se u svim sledećim selektorima preko var(--naziv)
+---------------------------------------------------------------- */
+:root {
+    --primary-color: #2563eb;        /* Glavna boja (linkovi, gumbi, brand) */
+    --secondary-color: #1e40af;      /* Tamniji ton glavne boje (hover na gumbe) */
+    --accent-color: #f59e0b;         /* Akcenat boja (cijena, hover u footeru) */
+    --text-dark: #1f2937;            /* Teme teksta u body i footeru */
+    --text-light: #6b7280;           /* Svetliji tekst / placeholderi / borderi */
+    --bg-light: #f8fafc;             /* Pozadina cijelog bodyja */
+    --white: #ffffff;                /* Bijela boja (pozadine kartica, header) */
+    --border-radius: 8px;           /* Zakrivljeni uglovi svuda */
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);  /* Blagi shadow */
+    --transition: all 0.3s ease;     /* Prijelazni efekti */
+    --container-max-width: 1200px;   /* Max širina kontejnera centriranog sa margin: 0 auto */
+    --gap-sm: 1rem;                  /* Manje razmaka u responsivnim trenucima */
+    --gap-md: 2rem;                  /* Veći razmaci u normalnom pogledu */
+}
+
+/* ----------------------------------------------------------------
+   GLOBALNI RESET
+   Svaki element u HTML-u počinje isto (bez default margina/paddinga)
+---------------------------------------------------------------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: system-ui, -apple-system, Arial, sans-serif;
+    line-height: 1.6;
+    color: var(--text-dark);
+    background: var(--bg-light);
+}
+ul {
+    list-style: none;  /* Svi <ul> u HTML-u nemaju bullet‑točke */
+}
+a {
+    text-decoration: none;
+    color: inherit;    /* Svi linkovi u HTML-u nasljeđuju color iz roditelja */
+}
+
+
+/* ----------------------------------------------------------------
+   HEADER I NAVBAR
+   Događa se na <header> i <div class="navbar"> iz HTML‑a
+---------------------------------------------------------------- */
+header {
+    background: var(--white);
+    box-shadow: var(--shadow);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+/* .navbar → div class="navbar" u headeru */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    gap: var(--gap-md);
+}
+
+/* .brand h1 → <div class="brand"><h1>Certified local tourist guides</h1></div> */
+.brand h1 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+/* .primary-nav ul → nav class="primary-nav" > ul */
+.primary-nav ul {
+    display: flex;
+    gap: var(--gap-md);
+    align-items: center;
+}
+
+/* .primary-nav a → sve <a> unutar nav.primary-nav (Home, Walking Tours, Places to see) */
+.primary-nav a {
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+    white-space: nowrap;
+}
+.primary-nav a:hover,
+.primary-nav a:focus {
+    background: var(--bg-light);
+    color: var(--primary-color);
+}
+
+/* .actions → div class="actions" (Search, Cart, Sign in, Sign up) */
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* .search → div class="search" (ikona + tekst "Search") */
+.search {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--text-light);
+    border-radius: var(--border-radius);
+    font-size: 0.9rem;
+    color: var(--text-light);
+    transition: var(--transition);
+}
+.search img {
+    width: 20px;
+    height: 20px;
+}
+.search:hover {
+    border-color: var(--primary-color);
+}
+
+/* .cart, .login, .signup → <a class="cart/login/signup"> iz .actions */
+.cart,
+.login,
+.signup {
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+    font-weight: 500;
+}
+.login,
+.signup {
+    background: var(--primary-color);
+    color: var(--white);
+}
+.login:hover,
+.signup:hover {
+    background: var(--secondary-color);
+}
+
+
+/* ----------------------------------------------------------------
+   SECTION ZA PROIZVODE
+   .products-section, .products-heading, .products-grid → main > section...
+---------------------------------------------------------------- */
+/* .products-section → <section class="products-section"> u <main> */
+.products-section {
+    max-width: var(--container-max-width);
+    margin: 2rem auto 0;
+    padding: 0 2rem;
+}
+
+/* .products-heading → <h2 class="products-heading">View All Products</h2> */
+.products-heading {
+    margin-bottom: 1.5rem;
+    color: var(--text-dark);
+}
+
+/* .products-grid → <section class="products-grid" id="products"> (js ga puni karticama) */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--gap-md);
+    margin-bottom: 2rem;
+}
+
+
+/* ----------------------------------------------------------------
+   KARTICE PROIZVODA (ove klase se dodaju u JS‑u)
+   Ne postoje u originalnom HTML‑u, ali će se pojaviti u #products
+---------------------------------------------------------------- */
+/* .product-card → svaki proizvod koji JS ubaci u #products */
+.product-card {
+    background: var(--white);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+.product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.2);
+}
+
+/* .product-img → <img class="product-img"> unutar .product-card */
+.product-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: var(--border-radius);
+    margin-bottom: 1rem;
+}
+
+/* .product-title → <h3 class="product-title"> ili slično u .product-card */
+.product-title {
+    margin-bottom: 0.5rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+/* .price-row → <div class="price-row"> / <p class="price-row"> oko cijene */
+.price-row {
+    margin: 0.5rem 0 1rem;
+}
+
+/* .price → <span class="price"> unutar .price-row */
+.price {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--accent-color);
+}
+
+/* .btn.add-to-cart → <button class="btn add-to-cart"> ili <a class="btn add-to-cart"> */
+.btn.add-to-cart {
+    width: 100%;
+    padding: 0.75rem;
+    background: var(--primary-color);
+    color: var(--white);
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+}
+.btn.add-to-cart:hover {
+    background: var(--secondary-color);
+}
+
+
+/* ----------------------------------------------------------------
+   FOOTER
+   footer, .footer-wrap, .footer1, .footer2 → <footer> struktura iz HTML‑a
+---------------------------------------------------------------- */
+footer {
+    background: var(--text-dark);
+    color: var(--white);
+    margin-top: 4rem;
+}
+
+/* .footer-wrap → div class="footer-wrap" unutar <footer> */
+.footer-wrap {
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: 3rem 2rem 2rem;
+}
+
+/* .footer1 → div class="footer1" (kompanija / support / guides) */
+.footer1 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--gap-md);
+    margin-bottom: var(--gap-md);
+}
+
+/* .footer1 h3 → naslovi u footer1: "Company", "Support", "Guides" */
+.footer1 h3 {
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+/* .footer1 ul → sve <ul> unutar footer1 (lista linkova) */
+.footer1 ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+/* .footer1 a → svi linkovi unutar footer1 (About us, Careers, Help Center itd.) */
+.footer1 a {
+    padding: 0.25rem 0;
+    transition: var(--transition);
+    opacity: 0.8;
+}
+.footer1 a:hover,
+.footer1 a:focus {
+    opacity: 1;
+    color: var(--accent-color);
+}
+
+/* .footer2 → div class="footer2" (copyright + ikone društvenih mreža) */
+.footer2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 2rem;
+    border-top: 1px solid var(--text-light);
+}
+
+/* .footer2 ul → <ul> sa ikonama FB, LinkedIn, Instagram, X */
+.footer2 ul {
+    display: flex;
+    gap: 1rem;
+}
+
+/* .footer2 img → slike ikona u footer2 (Facebook, LinkedIn, Instagram, X) */
+.footer2 img {
+    width: 24px;
+    height: 24px;
+    transition: var(--transition);
+}
+
+/* .footer2 a:hover img → ikona se malo uveća kad se prelazi mišem preko linka */
+.footer2 a:hover img {
+    transform: scale(1.1);
+}
+
+
+/* ----------------------------------------------------------------
+   RESPONZIV (media queries)
+   Sve ove pravila se odnose na iste elemente, ali na manjim ekranima
+---------------------------------------------------------------- */
+@media (max-width: 1024px) {
+    .navbar {
+        padding: 1rem 1.5rem;
+    }
+    .primary-nav a {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        padding: 0.75rem 1rem;
+        gap: var(--gap-sm);
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .primary-nav {
+        order: 3;
+        display: flex !important;
+        flex-direction: row;
+        overflow-x: auto;
+        padding: 0.5rem 0;
+        margin-top: 0.5rem;
+        border-top: 1px solid #e5e7eb;
+        border-bottom: 1px solid #e5e7eb;
+        gap: 0.25rem;
+    }
+    .primary-nav ul {
+        flex-direction: row;
+        gap: 0.5rem;
+        min-width: max-content;
+    }
+    .primary-nav a {
+        padding: 0.5rem 0.75rem;
+        white-space: nowrap;
+        font-size: 0.9rem;
+        flex-shrink: 0;
+    }
+    .brand {
+        order: 1;
+        flex: none;
+    }
+    .actions {
+        order: 2;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 0.25rem;
+    }
+    .search {
+        flex-shrink: 0;
+        padding: 0.4rem 0.75rem;
+        font-size: 0.85rem;
+    }
+    .products-section {
+        padding: 0 1rem;
+    }
+    .footer1 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .footer2 {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar {
+        padding: 0.5rem 1rem;
+    }
+    .brand h1 {
+        font-size: 1.1rem;
+    }
+    .primary-nav a {
+        padding: 0.4rem 0.6rem;
+        font-size: 0.85rem;
+    }
+    .actions {
+        flex-direction: row;
+        gap: 0.25rem;
+    }
+    .login,
+    .signup,
+    .cart {
+        padding: 0.4rem 0.6rem;
+        font-size: 0.85rem;
+    }
+    .products-grid {
+        grid-template-columns: 1fr;
+    }
+    .footer1 {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+}
